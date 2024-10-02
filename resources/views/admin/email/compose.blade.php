@@ -34,7 +34,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item active">
-                                                <a class="nav-link d-flex align-items-center" href="#">
+                                                <a class="nav-link d-flex align-items-center" href="{{ url('admin/email/sent') }}">
                                                     <i data-feather="mail" class="icon-lg me-2"></i>
                                                     Sent Mail
                                                 </a>
