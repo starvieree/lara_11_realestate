@@ -2,6 +2,8 @@
 @section('admin')
     <div class="page-content">
 
+        @include('_message')
+
         <div class="row inbox-wrapper">
             <div class="col-lg-12">
                 <div class="card">
@@ -96,16 +98,17 @@
                                 </div>
 
                                 <form action="{{ url('admin/email/compose_post') }}" method="post">
-                                    @csrf;
+                                    @csrf
                                     <div class="p-3 pb-0">
                                         <div class="to">
                                             <div class="row mb-3">
                                                 <label class="col-md-2 col-form-label">To:</label>
                                                 <div class="col-md-10">
-                                                    <select class="compose-multiple-select form-select">
-                                                        <option value="AL">Select Email</option>
+                                                    <select class="compose-multiple-select form-select" name="user_id">
+                                                        <option value="">Select Email [Agent and User]</option>
                                                         @foreach ($getEmail as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->email }}</option>
+                                                            <option value="{{ $value->id }}">{{ $value->email }} -
+                                                                {{ $value->role }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -139,7 +142,8 @@
                                         <div>
                                             <div class="col-md-12">
                                                 <button class="btn btn-primary me-1 mb-1" type="submit"> Send</button>
-                                                <button class="btn btn-secondary me-1 mb-1" type="button"> Cancel</button>
+                                                <button class="btn btn-secondary me-1 mb-1" type="button">
+                                                    Cancel</button>
                                             </div>
                                         </div>
                                     </div>
