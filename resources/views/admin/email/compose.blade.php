@@ -126,7 +126,7 @@
                                             <div class="row mb-3">
                                                 <label class="col-md-2 col-form-label">Subject</label>
                                                 <div class="col-md-10">
-                                                    <input class="form-control" type="text">
+                                                    <input class="form-control" name="subject" type="text">
                                                 </div>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label visually-hidden">Descriptions
                                                 </label>
-                                                <textarea class="form-control" name="easymde" rows="5"></textarea>
+                                                <textarea class="form-control" name="descriptions" rows="5"></textarea>
                                             </div>
                                         </div>
                                         <div>

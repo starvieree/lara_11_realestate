@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ComposeEmailModel;
+use App\Mail\ComposeEmailMail;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
@@ -12,7 +13,7 @@ class EmailController extends Controller
     public function EmailCompose(Request $request)
     {
         $data['getEmail'] = User::whereIn('role', ['agent', 'user'])->get();
-        return view('admin.email.composer', $data);
+        return view('admin.email.compose', $data);
     }
 
     public function EmailComposePost(Request $request)
