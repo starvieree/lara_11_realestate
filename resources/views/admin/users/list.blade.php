@@ -13,42 +13,42 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Search Users</h4>
-                        <form action="">
+                        <form method="get" action="">
                             <div class="row">
                                 <div class="col-sm-2">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Id</label>
-                                        <input type="text" name="id" class="form-control" placeholder="Enter Id">
+                                        <input type="text" name="id" class="form-control" value="{{ Request()->id }}" placeholder="Enter Id">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                                        <input type="text" name="name" class="form-control" value="{{ Request()->name }}" placeholder="Enter Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Username</label>
-                                        <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                                        <input type="text" name="username" class="form-control" value="{{ Request()->username }}" placeholder="Enter Username">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email Id</label>
-                                        <input type="email" name="email" class="form-control" placeholder="Enter Email Id">
+                                        <input type="email" name="email" class="form-control" value="{{ Request()->email }}" placeholder="Enter Email Id">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Phone</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="Enter Phone">
+                                        <input type="text" name="phone" class="form-control" value="{{ Request()->phone }}" placeholder="Enter Phone">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Website</label>
-                                        <input type="text" name="website" class="form-control" placeholder="Enter Website">
+                                        <input type="text" name="website" class="form-control" value="{{ Request()->website }}" placeholder="Enter Website">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
