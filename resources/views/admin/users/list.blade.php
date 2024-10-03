@@ -7,6 +7,82 @@
                 <li class="breadcrumb-item active" aria-current="page">Users List</li>
             </ol>
         </nav>
+
+        <div class="row">
+            <div class="col-lg-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Search Users</h4>
+                        <form action="">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Id</label>
+                                        <input type="text" name="id" class="form-control" placeholder="Enter Id">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Username</label>
+                                        <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Email Id</label>
+                                        <input type="email" name="email" class="form-control" placeholder="Enter Email Id">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Phone</label>
+                                        <input type="text" name="phone" class="form-control" placeholder="Enter Phone">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Website</label>
+                                        <input type="text" name="website" class="form-control" placeholder="Enter Website">
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Role</label>
+                                        <select name="role" id="" class="form-control">
+                                            <option value="">Select Role</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="agent">Agent</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Status</label>
+                                        <select name="status" id="" class="form-control">
+                                            <option value="">Select Status</option>
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <a href="{{ url('admin/users') }}" class="btn btn-danger mx-3">Reset</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
         <div class="row">
             <div class="col-lg-12 stretch-card">
                 <div class="card">
