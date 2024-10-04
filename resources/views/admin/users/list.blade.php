@@ -56,9 +56,9 @@
                                         <label for="" class="form-label">Role</label>
                                         <select name="role" id="" class="form-control">
                                             <option value="">Select Role</option>
-                                            <option value="admin">Admin</option>
-                                            <option value="agent">Agent</option>
-                                            <option value="user">User</option>
+                                            <option value="admin" {{ (Request()->role == 'admin') ? 'selected' : '' }}>Admin</option>
+                                            <option value="agent" {{ (Request()->role == 'agent') ? 'selected' : '' }}>Agent</option>
+                                            <option value="user" {{ (Request()->role == 'user') ? 'selected' : '' }}>User</option>
                                         </select>
                                     </div>
                                 </div>
@@ -67,8 +67,8 @@
                                         <label for="" class="form-label">Status</label>
                                         <select name="status" id="" class="form-control">
                                             <option value="">Select Status</option>
-                                            <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option value="active" {{ (Request()->status == 'active') ? 'selected' : '' }}>Active</option>
+                                            <option value="inactive" {{ (Request()->status == 'inactive') ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($getRecord as $value)
+                                    @forelse ($getRecord as $value)
                                         <tr class="table-info text-dark">
                                             <td>{{ $value->id }}</td>
                                             <td>{{ $value->name }}</td>
@@ -145,7 +145,13 @@
                                                         class="">View</span></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+
+                                    @empty
+                                    <tr>
+                                        <td colspan="100%">No Record Found.</td>
+                                    </tr>
+
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
