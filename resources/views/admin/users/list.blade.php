@@ -18,37 +18,43 @@
                                 <div class="col-sm-2">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Id</label>
-                                        <input type="text" name="id" class="form-control" value="{{ Request()->id }}" placeholder="Enter Id">
+                                        <input type="text" name="id" class="form-control"
+                                            value="{{ Request()->id }}" placeholder="Enter Id">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Name</label>
-                                        <input type="text" name="name" class="form-control" value="{{ Request()->name }}" placeholder="Enter Name">
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ Request()->name }}" placeholder="Enter Name">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Username</label>
-                                        <input type="text" name="username" class="form-control" value="{{ Request()->username }}" placeholder="Enter Username">
+                                        <input type="text" name="username" class="form-control"
+                                            value="{{ Request()->username }}" placeholder="Enter Username">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Email Id</label>
-                                        <input type="email" name="email" class="form-control" value="{{ Request()->email }}" placeholder="Enter Email Id">
+                                        <input type="email" name="email" class="form-control"
+                                            value="{{ Request()->email }}" placeholder="Enter Email Id">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Phone</label>
-                                        <input type="text" name="phone" class="form-control" value="{{ Request()->phone }}" placeholder="Enter Phone">
+                                        <input type="text" name="phone" class="form-control"
+                                            value="{{ Request()->phone }}" placeholder="Enter Phone">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label for="" class="form-label">Website</label>
-                                        <input type="text" name="website" class="form-control" value="{{ Request()->website }}" placeholder="Enter Website">
+                                        <input type="text" name="website" class="form-control"
+                                            value="{{ Request()->website }}" placeholder="Enter Website">
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
@@ -56,9 +62,12 @@
                                         <label for="" class="form-label">Role</label>
                                         <select name="role" id="" class="form-control">
                                             <option value="">Select Role</option>
-                                            <option value="admin" {{ (Request()->role == 'admin') ? 'selected' : '' }}>Admin</option>
-                                            <option value="agent" {{ (Request()->role == 'agent') ? 'selected' : '' }}>Agent</option>
-                                            <option value="user" {{ (Request()->role == 'user') ? 'selected' : '' }}>User</option>
+                                            <option value="admin" {{ Request()->role == 'admin' ? 'selected' : '' }}>
+                                                Admin</option>
+                                            <option value="agent" {{ Request()->role == 'agent' ? 'selected' : '' }}>
+                                                Agent</option>
+                                            <option value="user" {{ Request()->role == 'user' ? 'selected' : '' }}>User
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -67,8 +76,10 @@
                                         <label for="" class="form-label">Status</label>
                                         <select name="status" id="" class="form-control">
                                             <option value="">Select Status</option>
-                                            <option value="active" {{ (Request()->status == 'active') ? 'selected' : '' }}>Active</option>
-                                            <option value="inactive" {{ (Request()->status == 'inactive') ? 'selected' : '' }}>Inactive</option>
+                                            <option value="active" {{ Request()->status == 'active' ? 'selected' : '' }}>
+                                                Active</option>
+                                            <option value="inactive"
+                                                {{ Request()->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
@@ -87,7 +98,16 @@
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users List</h4>
+                        
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <h4 class="card-title">Users List</h4>
+                            <div class="d-flex align-items-center">
+                                <a href="{{ url('admin/users/add') }}" class="btn btn-primary">
+                                    Add User
+                                </a>
+                            </div>
+                        </div>
+
                         <div class="table-responsive pt-3">
                             <table class="table table-bordered">
                                 <thead>
@@ -140,17 +160,17 @@
                                             </td>
                                             <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                                             <td>
-                                                <a class="dropdown-item d-flex align-items-center" href="{{ url('admin/users/view/'.$value->id) }}"><i
+                                                <a class="dropdown-item d-flex align-items-center"
+                                                    href="{{ url('admin/users/view/' . $value->id) }}"><i
                                                         data-feather="eye" class="icon-sm me-2"></i> <span
                                                         class="">View</span></a>
                                             </td>
                                         </tr>
 
                                     @empty
-                                    <tr>
-                                        <td colspan="100%">No Record Found.</td>
-                                    </tr>
-
+                                        <tr>
+                                            <td colspan="100%">No Record Found.</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
