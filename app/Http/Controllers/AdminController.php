@@ -17,8 +17,8 @@ class AdminController extends Controller
             ->orderBy('month', 'asc')
             ->get();
 
-            $data['months'] = $user->pluck('month');
-            $data['counts'] = $user->pluck('count');
+        $data['months'] = $user->pluck('month');
+        $data['counts'] = $user->pluck('count');
 
         return view('admin.index', $data);
     }
@@ -67,7 +67,7 @@ class AdminController extends Controller
             $file->move('upload/', $filename);
             $user->photo = $filename;
         }
-        
+
         $user->address = trim($request->address);
         $user->about = trim($request->about);
         $user->website = trim($request->website);
@@ -88,7 +88,32 @@ class AdminController extends Controller
         return view('admin.users.view', $data);
     }
 
-    public function AdminAddUsers(Request $request) {
+    public function AdminAddUsers(Request $request)
+    {
         return view('admin.users.add');
+    }
+
+    public function AdminAddUsersStore(Request $request)
+    {
+        // dd($request->all());
+
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required',
+            'status' => 'required'
+        ]);
+
+        $save = new User;
+        $save-> name    = trim($request->name);
+        $save->username = trim($request->username);
+        $save->email    = trim($request->email);
+        $save->phone    = trim($request->phone);
+        $save->role     = trim($request->role);
+        $save->status   = trim($request->status);
+        $save->save();
+
+        return redirect('admin/users')->with('success', 'Record Successfully Create');
     }
 }

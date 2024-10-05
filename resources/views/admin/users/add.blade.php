@@ -15,7 +15,8 @@
 
                         <h6 class="card-title">Add User</h6>
 
-                        <form class="forms-sample">
+                        <form class="forms-sample" method="post" action="{{ url('admin/users/add') }}">
+                            {{ csrf_field() }}
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Name <span style="color: red;">*</span></label>
                                 <div class="col-sm-9">
@@ -32,7 +33,8 @@
                                 <label class="col-sm-3 col-form-label">Email <span style="color: red;">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="email" name="email" class="form-control" autocomplete="off" placeholder="Email"
-                                        required>
+                                        required value="{{ old('email') }}">
+                                    <span style="color: red;">{{ $errors->first('email') }}</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -52,7 +54,17 @@
                                     </select>
                                 </div>
                             </div>
-                            <a type="submit" class="btn btn-primary me-2">Submit</a>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Status <span style="color: red;">*</span></label>
+                                <div class="col-sm-9">
+                                    <select name="status" class="form-control" required>
+                                        <option value="">Select Status</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
                             <a href="{{ url('admin/users') }}" class="btn btn-secondary">Back</a>
                         </form>
 
