@@ -35,6 +35,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('admin/users/view/{id}', [AdminController::class, 'AdminUsersView']);
 
+    Route::get('admin/users/edit/{id}', [AdminController::class, 'AdminUsersEditId']);
+
+    Route::post('admin/users/edit/{id}', [AdminController::class, 'AdminUsersEditIdUpdate']);
+
     Route::get('admin/users/add', [AdminController::class, 'AdminAddUsers']);
 
     Route::post('admin/users/add', [AdminController::class, 'AdminAddUsersStore']);

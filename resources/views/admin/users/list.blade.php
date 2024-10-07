@@ -101,7 +101,7 @@
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        
+
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                             <h4 class="card-title">Users List</h4>
                             <div class="d-flex align-items-center">
@@ -167,6 +167,11 @@
                                                     href="{{ url('admin/users/view/' . $value->id) }}"><i
                                                         data-feather="eye" class="icon-sm me-2"></i> <span
                                                         class="">View</span></a>
+
+                                                <a class="dropdown-item d-flex align-items-center"
+                                                    href="{{ url('admin/users/edit/' . $value->id) }}"><i
+                                                        data-feather="edit-2" class="icon-sm me-2"></i> <span
+                                                        class="">Edit</span></a>
                                             </td>
                                         </tr>
 

@@ -92,6 +92,26 @@ class AdminController extends Controller
         return view('admin.users.view', $data);
     }
 
+    public function AdminUsersEditId($id)
+    {
+        $data['getRecord'] = User::find($id);
+        return view('admin.users.edit', $data);
+    }
+
+    public function AdminUsersEditIdUpdate($id, Request $request)
+    {
+        // dd($request->all());
+        $save = User::find($id);
+        $save->name = trim($request->name);
+        $save->username = trim($request->username);
+        $save->phone = trim($request->phone);
+        $save->role = trim($request->role);
+        $save->status = trim($request->status);
+        $save->save();
+
+        return redirect('admin/users')->with('success', 'Record Successfully Updated');
+    }
+
     public function AdminAddUsers(Request $request)
     {
         return view('admin.users.add');
@@ -121,7 +141,7 @@ class AdminController extends Controller
 
         Mail::to($request->email)->send(new RegisteredMail($save));
 
-        return redirect('admin/users')->with('success', 'Record Successfully Create');
+        return redirect('admin/users')->with('success', 'Record Successfully Created');
     }
 
     public function SetNewPassword($token)
