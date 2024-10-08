@@ -83,6 +83,12 @@ class AdminController extends Controller
     public function AdminUsers(Request $request)
     {
         $data['getRecord'] = User::getRecord($request);
+        $data['totalAdmin'] = User::where('role', '=', 'admin')->where('is_delete', '=', 0)->count();
+        $data['totalAgent'] = User::where('role', '=', 'agent')->where('is_delete', '=', 0)->count();
+        $data['totalUser'] = User::where('role', '=', 'user')->where('is_delete', '=', 0)->count();
+        $data['totalActive'] = User::where('status', '=', 'active')->where('is_delete', '=', 0)->count();
+        $data['totalInactive'] = User::where('status', '=', 'inactive')->where('is_delete', '=', 0)->count();
+        $data['total'] = User::where('is_delete', '=', 0)->count();
         return view('admin.users.list', $data);
     }
 
@@ -112,7 +118,8 @@ class AdminController extends Controller
         return redirect('admin/users')->with('success', 'Record Successfully Updated');
     }
 
-    public function AdminDeleteSoft($id, Request $request) {
+    public function AdminDeleteSoft($id, Request $request)
+    {
         $softDelete = User::find($id);
         $softDelete->is_delete = 1;
         $softDelete->save();
@@ -138,7 +145,7 @@ class AdminController extends Controller
         ]);
 
         $save = new User;
-        $save-> name    = trim($request->name);
+        $save->name    = trim($request->name);
         $save->username = trim($request->username);
         $save->email    = trim($request->email);
         $save->phone    = trim($request->phone);
