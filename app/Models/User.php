@@ -44,6 +44,7 @@ class User extends Authenticatable
 
     static public function getRecord($request) {
         $return = self::select('users.*')
+                    ->where('is_delete', '=', 0)
                     ->orderBy('id', 'asc');
 
                     // Search Start

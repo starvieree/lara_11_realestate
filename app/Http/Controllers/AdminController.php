@@ -112,6 +112,14 @@ class AdminController extends Controller
         return redirect('admin/users')->with('success', 'Record Successfully Updated');
     }
 
+    public function AdminDeleteSoft($id, Request $request) {
+        $softDelete = User::find($id);
+        $softDelete->is_delete = 1;
+        $softDelete->save();
+
+        return redirect('admin/users')->with('success', 'Record Successfully Soft Deleted');
+    }
+
     public function AdminAddUsers(Request $request)
     {
         return view('admin.users.add');

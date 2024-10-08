@@ -172,6 +172,10 @@
                                                     href="{{ url('admin/users/edit/' . $value->id) }}"><i
                                                         data-feather="edit-2" class="icon-sm me-2"></i> <span
                                                         class="">Edit</span></a>
+                                                <a class="dropdown-item d-flex align-items-center"
+                                                    href="{{ url('admin/users/delete/' . $value->id) }}" onclick="return confirm('Are you sure you want to delete?')"><i
+                                                        data-feather="trash" class="icon-sm me-2"></i> <span
+                                                        class="">Delete</span></a>
                                             </td>
                                         </tr>
 

@@ -39,6 +39,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::post('admin/users/edit/{id}', [AdminController::class, 'AdminUsersEditIdUpdate']);
 
+    Route::get('admin/users/delete/{id}', [AdminController::class, 'AdminDeleteSoft']);
+
     Route::get('admin/users/add', [AdminController::class, 'AdminAddUsers']);
 
     Route::post('admin/users/add', [AdminController::class, 'AdminAddUsersStore']);
