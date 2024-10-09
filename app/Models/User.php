@@ -42,46 +42,51 @@ class User extends Authenticatable
         ];
     }
 
-    static public function getRecord($request) {
+    static public function getRecord($request)
+    {
         $return = self::select('users.*')
-                    ->where('is_delete', '=', 0)
-                    ->orderBy('id', 'asc');
+            ->where('is_delete', '=', 0)
+            ->orderBy('id', 'asc');
 
-                    // Search Start
-                    if(!empty(Request()->get('id'))) {
-                        $return = $return->where('users.id', '=', Request()->get('id'));
-                    }
+        // Search Start
+        if (!empty(Request()->get('id'))) {
+            $return = $return->where('users.id', '=', Request()->get('id'));
+        }
 
-                    if (!empty(Request()->get('name'))) {
-                        $return = $return->where('users.name', 'like', '%'.Request()->get('name').'%');
-                    }
+        if (!empty(Request()->get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request()->get('name') . '%');
+        }
 
-                    if (!empty(Request()->get('username'))) {
-                        $return = $return->where('users.username', 'like', '%'.Request()->get('username').'%');
-                    }
+        if (!empty(Request()->get('username'))) {
+            $return = $return->where('users.username', 'like', '%' . Request()->get('username') . '%');
+        }
 
-                    if (!empty(Request()->get('email'))) {
-                        $return = $return->where('users.email', 'like', '%'.Request()->get('email').'%');
-                    }
+        if (!empty(Request()->get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request()->get('email') . '%');
+        }
 
-                    if (!empty(Request()->get('phone'))) {
-                        $return = $return->where('users.phone', 'like', '%'.Request()->get('phone').'%');
-                    }
+        if (!empty(Request()->get('phone'))) {
+            $return = $return->where('users.phone', 'like', '%' . Request()->get('phone') . '%');
+        }
 
-                    if (!empty(Request()->get('website'))) {
-                        $return = $return->where('users.website', 'like', '%'.Request()->get('website').'%');
-                    }
+        if (!empty(Request()->get('website'))) {
+            $return = $return->where('users.website', 'like', '%' . Request()->get('website') . '%');
+        }
 
-                    if (!empty(Request()->get('role'))) {
-                        $return = $return->where('users.role', 'like', '%'.Request()->get('role').'%');
-                    }
+        if (!empty(Request()->get('role'))) {
+            $return = $return->where('users.role', 'like', '%' . Request()->get('role') . '%');
+        }
 
-                    if (!empty(Request()->get('status'))) {
-                        $return = $return->where('users.status', '=', Request()->get('status'));
-                    }
-                    // Search End
+        if (!empty(Request()->get('status'))) {
+            $return = $return->where('users.status', '=', Request()->get('status'));
+        }
 
-                    $return = $return->paginate(5);
-                    return $return;
+        if (!empty(Request()->get('start_date')) && !empty(Request()->get('end_date'))) {
+            $return = $return->where('users.created_at', '>=', Request()->get('start_date'))->where('users.created_at', '<=', Request()->get('end_date'));
+        }
+        // Search End
+
+        $return = $return->paginate(5);
+        return $return;
     }
 }
