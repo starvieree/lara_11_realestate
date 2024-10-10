@@ -167,9 +167,16 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($getRecord as $value)
+                                    <form class="a_form{{ $value->id }}" method="post">
+                                        @csrf
                                         <tr class="table-info text-dark">
                                             <td>{{ $value->id }}</td>
-                                            <td>{{ $value->name }}</td>
+                                            <td style="min-width: 150px;">
+                                                <input type="hidden" name="edit_id" value="{{ $value->id }}">
+                                                <input type="text" class="form-control" name="edit_name" value="{{ old('name', $value->name) }}">
+                                                <br>
+                                                <button type="button" class="btn btn-success submitform" id="{{ $value->id }}">Save</button>
+                                            </td>
                                             <td>{{ $value->username }}</td>
                                             <td>{{ $value->email }}</td>
                                             <td>
@@ -214,7 +221,7 @@
                                                         class="">Delete</span></a>
                                             </td>
                                         </tr>
-
+                                    </form>
                                     @empty
                                         <tr>
                                             <td colspan="100%">No Record Found.</td>
@@ -231,4 +238,31 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {  // Pastikan script berjalan setelah DOM siap
+        $(document).on('click', '.submitform', function() {  // Menggunakan on() untuk menangani klik dinamis
+            var id = $(this).attr('id');  // Mendapatkan ID dari tombol yang diklik
+            $.ajax({
+                url: "{{ url('admin/users/update') }}",  // URL tujuan
+                method: "POST",
+                data: $('.a_form' + id).serialize(),  // Serialize data dari form dengan ID terkait
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"  // Menyertakan CSRF token
+                },
+                dataType: "json",
+                success: function(response) {
+                    alert(response.success);  // Menampilkan pesan sukses
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);  // Menampilkan error di console
+                }
+            });
+        });
+    });
+</script>
+
 @endsection
