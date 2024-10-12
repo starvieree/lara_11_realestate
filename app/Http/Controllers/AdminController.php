@@ -135,9 +135,33 @@ class AdminController extends Controller
         $recoder->save();
         $json['success'] = 'Data Update Successfully!';
         echo json_encode($json);
-
-        // return redirect('admin/users')->with('success', '')
     }
+
+    public function AdminUsersChangeStatus(Request $request) {
+        // Validasi input
+        $request->validate([
+            'order_id' => 'required|exists:users,id', // Cek apakah user ada
+            'status_id' => 'required|integer',        // Cek apakah status ID valid
+        ]);
+    
+        $order = User::find($request->order_id);
+    
+        if (!$order) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found'
+            ]);
+        }
+    
+        $order->status = $request->status_id;
+        $order->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Status successfully changed.'
+        ]);
+    }
+    
 
     public function AdminAddUsers(Request $request)
     {

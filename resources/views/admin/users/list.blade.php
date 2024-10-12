@@ -198,11 +198,16 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($value->status == 'active')
+                                                {{-- @if ($value->status == 'active')
                                                     <span class="badge bg-primary">Active</span>
                                                 @else
                                                     <span class="badge bg-danger">Inactive</span>
-                                                @endif
+                                                @endif --}}
+
+                                                <select style="width: 170px;" id="{{ $value->id }}" class="form-control changeStatus">
+                                                    <option {{ ($value->status == 'active') ? 'selected' : '' }} value="1">Active</option>
+                                                    <option {{ ($value->status == 'inactive') ? 'selected' : '' }} value="0">Inactive</option>
+                                                </select>
                                             </td>
                                             <td>{{ date('d-m-Y', strtotime($value->created_at)) }}</td>
                                             <td>
@@ -262,6 +267,34 @@
                 }
             });
         });
+    });
+
+    $('.changeStatus').change(function() {
+        var status_id = $(this).val();
+        var order_id = $(this).attr('id');
+
+        console.log('Status ID:', status_id);  // Debugging nilai status_id
+    console.log('Order ID:', order_id);    // Debugging nilai order_id
+
+        $.ajax({
+        type: "GET",
+        url: "{{ url('admin/users/changeStatus') }}",
+        data: {status_id: status_id, order_id: order_id},
+        dataType: 'JSON',
+        success: function(data) {
+            console.log(data); // Debugging response
+            if (data.success) {
+                alert('Status successfully changed');
+                window.location.href = ""; 
+            } else {
+                alert(data.message || 'An error occurred');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText); // Log error jika ada
+            alert('Error occurred: ' + error);
+        }
+    });
     });
 </script>
 
