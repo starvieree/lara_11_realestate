@@ -47,6 +47,39 @@ class AdminController extends Controller
         return view('admin.admin_profile', $data);
     }
 
+    public function AdminMyProfile(Request $request)
+    {
+        $data['getRecord'] = User::find(Auth::user()->id);
+        return view('admin.my_profile', $data);
+    }
+
+    public function AdminMyProfileUpdate(Request $request)
+    {
+        $user = request()->validate([
+            'email' => 'required|unique:users,email,'.Auth::user()->id
+        ]);
+
+        $user = User::find(Auth::user()->id);
+
+        $user->name = trim($request->name);
+        $user->email = trim($request->email);
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if (!empty($request->file('photo'))) {
+            $file = $request->file('photo');
+            $randomStr = Str::random(30);
+            $filename = $randomStr . "." . $file->getClientOriginalExtension();
+            $file->move('upload/', $filename);
+            $user->photo = $filename;
+        }
+
+        $user->save();
+        return redirect('admin/my_profile')->with('success', 'My Account Updated!');
+    }
+
     public function AdminProfileUpdate(Request $request)
     {
 
@@ -83,7 +116,7 @@ class AdminController extends Controller
     public function AdminUsers(Request $request)
     {
         $data['getRecord'] = User::getRecord($request);
-        
+
         $data['totalAdmin'] = User::where('role', '=', 'admin')->where('is_delete', '=', 0)->count();
         $data['totalAgent'] = User::where('role', '=', 'agent')->where('is_delete', '=', 0)->count();
         $data['totalUser'] = User::where('role', '=', 'user')->where('is_delete', '=', 0)->count();
@@ -137,31 +170,32 @@ class AdminController extends Controller
         echo json_encode($json);
     }
 
-    public function AdminUsersChangeStatus(Request $request) {
+    public function AdminUsersChangeStatus(Request $request)
+    {
         // Validasi input
         $request->validate([
             'order_id' => 'required|exists:users,id', // Cek apakah user ada
             'status_id' => 'required|integer',        // Cek apakah status ID valid
         ]);
-    
+
         $order = User::find($request->order_id);
-    
+
         if (!$order) {
             return response()->json([
                 'success' => false,
                 'message' => 'User not found'
             ]);
         }
-    
+
         $order->status = $request->status_id;
         $order->save();
-    
+
         return response()->json([
             'success' => true,
             'message' => 'Status successfully changed.'
         ]);
     }
-    
+
 
     public function AdminAddUsers(Request $request)
     {
